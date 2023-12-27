@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <mutex>
+#include <condition_variable>
 
 class Task;
 using TaskPtr = std::shared_ptr<Task>;
@@ -29,4 +30,5 @@ private:
 
     int wait_executed;
     std::mutex count_mtx_;
+    std::condition_variable count_cond_;
 };

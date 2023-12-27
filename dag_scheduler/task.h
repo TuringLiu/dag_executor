@@ -19,12 +19,12 @@ public:
     template<typename CC>
     Task(CC&& cc);
 
-    void execute_();
-
     void set_precede(Task*);
     void set_precede(std::vector<Task*>);
+    void set_precede(TaskPtr);
 
 private:
+    void execute_();
     void pre_run_();
     void post_run_();
 
@@ -39,3 +39,6 @@ private:
     int condition_;
     std::mutex mtx_;
 };
+
+template<typename CC>
+Task::Task(CC&& cc): work{std::forward<CC>(cc)} {}

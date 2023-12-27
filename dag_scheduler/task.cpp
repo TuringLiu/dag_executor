@@ -1,10 +1,7 @@
 #include "task.h"
 #include "executor.h"
 #include "scheduler.h"
-
-
-template<typename CC>
-Task::Task(CC&& cc): work{std::forward<CC>(cc)} {}
+#include <iostream>
 
 void Task::execute_()
 {
@@ -41,6 +38,7 @@ void Task::post_run_()
     {
         std::unique_lock<std::mutex> lock(schedule_->count_mtx_);
         schedule_->wait_executed -= 1;
+        if(schedule_->wait_executed == 0) schedule_->count_cond_.notify_one();
     }
 }
 
@@ -58,4 +56,9 @@ void Task::set_precede(std::vector<Task*> pre_tasks)
     {
         set_precede(pre_task);
     }
+}
+
+void Task::set_precede(TaskPtr pre_task)
+{
+    set_precede(pre_task.get());
 }

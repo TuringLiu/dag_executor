@@ -10,10 +10,7 @@ class Executor
 {
 public:
     void add_task(std::function<void()> f);
-    static Executor* get_instance()
-    {
-        return Executor::instance_;
-    }
+    static Executor* get_instance();
 
     Executor(const Executor&) = delete;
     Executor& operator = (const Executor) = delete;

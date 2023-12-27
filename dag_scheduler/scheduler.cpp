@@ -1,7 +1,7 @@
 #include "task.h"
 #include "executor.h"
 #include "scheduler.h"
-
+#include <iostream>
 
 Scheduler::Scheduler(): name_{"default_scheduler"}
 {
@@ -44,11 +44,17 @@ void Scheduler::work_()
         }
     }
     // wait to executed
+    {
+        std::unique_lock<std::mutex> lock(count_mtx_);
+        count_cond_.wait(lock, [this](){
+            return this->wait_executed == 0;
+        });
+    }
 
 }
 
 void Scheduler::post_run_()
 {
     // todo: add log metrics
-
+    std::cout << "scheduler post_run" << std::endl;
 }
