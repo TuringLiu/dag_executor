@@ -3,6 +3,8 @@
 #include <string>
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
+// #include "executor.h"
 
 class Task;
 using TaskPtr = std::shared_ptr<Task>;
@@ -15,6 +17,7 @@ class Scheduler
 public:
     Scheduler();
     Scheduler(const std::string& name);
+    ~Scheduler();
 
     void add_task(TaskPtr);
     void execute_();

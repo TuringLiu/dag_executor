@@ -10,6 +10,10 @@ Scheduler::Scheduler(): name_{"default_scheduler"}
 Scheduler::Scheduler(const std::string& name): name_{name}
 {
 }
+Scheduler::~Scheduler()
+{
+    Executor::works_over();
+}
 
 void Scheduler::add_task(TaskPtr task)
 {
@@ -32,9 +36,9 @@ void Scheduler::pre_run_()
 
 void Scheduler::work_()
 {
-    // start task and end task to make some 
+    // only start task and end task 
     wait_executed = tasks_.size();
-    for(auto task: tasks_)
+    for(auto& task: tasks_)
     {
         if(task->condition_ == 0) 
         {
