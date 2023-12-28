@@ -8,13 +8,13 @@ int main()
 {
     std::cout << "this is a test!" << std::endl;
 
-    TaskPtr task = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 1\n" << std::endl;});
-    TaskPtr task_2 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 2\n" << std::endl;});
-    TaskPtr task_3 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 3\n" << std::endl;});
-    TaskPtr task_4 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 4\n" << std::endl;});
+    TaskPtr task = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 1" << std::endl;});
+    TaskPtr task_2 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 2" << std::endl;});
+    TaskPtr task_3 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 3" << std::endl;});
+    TaskPtr task_4 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 4" << std::endl;});
 
-    TaskPtr task_5 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 5\n" << std::endl;});
-    TaskPtr task_6 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 6\n" << std::endl;});
+    TaskPtr task_5 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 5" << std::endl;});
+    TaskPtr task_6 = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 6" << std::endl;});
 
 
     Scheduler dag;

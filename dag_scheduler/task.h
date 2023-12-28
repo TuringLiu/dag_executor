@@ -2,6 +2,7 @@
 #include <memory>
 #include <functional>
 #include <mutex>
+#include <atomic>
 
 /*
 Info: Task own the function that would be executed. Besides Task get the DAG relatiionship rather than scheduler.
@@ -36,7 +37,7 @@ private:
 
     std::function<void()> work;
     std::string name_;
-    int condition_;
+    std::atomic<int> condition_;
     std::mutex mtx_;
 };
 

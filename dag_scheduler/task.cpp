@@ -20,7 +20,7 @@ void Task::post_run_()
     // todo: inform successor and add some log
 
     // inform successor
-    for(auto successor: successors_)
+    for(auto& successor: successors_)
     {
         std::unique_lock<std::mutex> lock(successor->mtx_); 
         successor->condition_ -= 1;
