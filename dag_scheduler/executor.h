@@ -1,6 +1,8 @@
 #include <functional>
 #include "thread_pool/thread_pool.h"
 
+// 一个线程池的接口类，调用线程池执行task
+
 // singleton 
 class Executor
 {

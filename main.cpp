@@ -6,6 +6,7 @@
 
 int main()
 {
+    
     std::cout << "this is a test!" << std::endl;
 
     TaskPtr task = std::make_shared<Task>([](){ std::cout << "this is a test for lamda function! 1" << std::endl;});
@@ -33,7 +34,7 @@ int main()
     task_6->set_precede(task_5);
     task_5->set_precede(task_4);
 
-    dag.execute_();
+    dag.execute();
 
     return 0;
 }

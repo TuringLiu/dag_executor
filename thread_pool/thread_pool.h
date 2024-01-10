@@ -7,7 +7,6 @@
 #include <vector>
 #include <atomic>
 // todo: support return-value ways [future instance]
-// now: only support non-return-value way
 // todo：目前的有界任务队列，任务溢出时，需放至redis缓存中
 // todo: 引入信号量机制，当任务队列超过1s无任务执行时，就切换至阻塞态
 

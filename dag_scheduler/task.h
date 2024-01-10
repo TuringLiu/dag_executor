@@ -6,6 +6,11 @@
 
 /*
 Info: Task own the function that would be executed. Besides Task get the DAG relatiionship rather than scheduler.
+
+// 实际持有执行函数
+// 启动后续结点的操作在此处，而不是在scheduler里
+// 未来可对task进行调度的方式进行性能测试，测试与直接执行的性能gap
+
 */
 
 class Scheduler;

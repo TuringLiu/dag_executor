@@ -21,7 +21,7 @@ void Scheduler::add_task(TaskPtr task)
     task->schedule_ = this;
 }
 
-void Scheduler::execute_()
+void Scheduler::execute()
 {
     pre_run_();
     work_();

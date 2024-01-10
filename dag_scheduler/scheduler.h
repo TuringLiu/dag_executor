@@ -4,7 +4,8 @@
 #include <mutex>
 #include <condition_variable>
 #include <iostream>
-// #include "executor.h"
+
+// scheduler负责启动初始结点和控制结束结点，属于一张DAG图的抽象
 
 class Task;
 using TaskPtr = std::shared_ptr<Task>;
@@ -20,7 +21,7 @@ public:
     ~Scheduler();
 
     void add_task(TaskPtr);
-    void execute_();
+    void execute();
 
 private:
     void pre_run_();
