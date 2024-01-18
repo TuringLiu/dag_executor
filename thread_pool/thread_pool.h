@@ -17,7 +17,7 @@ class ThreadPool
 {
     friend class Worker;
 public:
-    ThreadPool();
+    ThreadPool() = delete;
     ThreadPool(const int& worker_num, const int& tasks_size);
     ~ThreadPool();
 
@@ -34,10 +34,10 @@ private:
     std::vector<Worker*> workers_;
     std::vector<std::thread> threads_;
 
-    int idx_ = 0;
+    std::atomic<int> idx_{0};
     std::mutex mtx_;
 
-    bool stop_{false};
+    std::atomic<bool> stop_{false};
     std::atomic<int> stop_num_{0};
     std::condition_variable stop_cond_;
 
@@ -50,7 +50,7 @@ public:
     Worker() = delete;
     Worker(const int& tasks_size, const int& id);
 
-    bool add_task(std::function<void()>&&);
+    bool add_task(std::function<void()>);
     void work_();
 
 private:
@@ -58,6 +58,7 @@ private:
 
 private:
     std::mutex task_mtx_;
+    std::condition_variable task_cond_;
     std::queue<std::function<void()>> tasks_queue_;
     
     int tasks_size_;

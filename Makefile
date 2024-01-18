@@ -5,7 +5,7 @@ OBJ = ./main
 LIB = lib/libredis++.a /usr/local/lib/libhiredis.a -lprometheus-cpp-pull -lprometheus-cpp-core -lz
 
 DAG_FILES = dag_scheduler/task.cpp dag_scheduler/executor.cpp dag_scheduler/scheduler.cpp
-LOG_FILES = logging_service/controler.cpp
+LOG_FILES = log_service/controler.cpp
 THREAD_POOL_FILES = thread_pool/thread_pool.cpp
 
 main:

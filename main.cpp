@@ -4,7 +4,6 @@
 #include <iostream>
 #include <thread>
 
-
 #include <array>
 #include <chrono>
 #include <cstdlib>
@@ -14,22 +13,27 @@
 #include <unistd.h>
 #include <algorithm>
 
-#include "logging_service/controler.h"
-#include "thread_pool/thread_pool.h"
+#include "log_service/log_sender.h"
 
-#include "test/test.h"
-
+#include <functional>
 
 int main()
 {
-  auto tp = std::chrono::system_clock::now();
-  auto ttp = std::chrono::high_resolution_clock::now();
-  auto tp1 = std::chrono::steady_clock::now();
-  std::time_t tt = std::chrono::system_clock::to_time_t(tp);
-  std::cout << tt << "seconds from 1970-01-01 00:00:00 UTC" << std::endl;
-  std::cout << tp.time_since_epoch().count() << std::endl;
-  std::cout << ttp.time_since_epoch().count() << std::endl;
-  std::cout << tp1.time_since_epoch().count() << std::endl;
+  LocalSender metrics_local;
+  for(int i = 0; i < 101; i++)
+  {
+    metrics_local.send("test", {{"method", "GET"}, {"abc", "123"}}, i);
+  }
+  
+
+  // auto tp = std::chrono::system_clock::now();
+  // auto ttp = std::chrono::high_resolution_clock::now();
+  // auto tp1 = std::chrono::steady_clock::now();
+  // std::time_t tt = std::chrono::system_clock::to_time_t(tp);
+  // std::cout << tt << "seconds from 1970-01-01 00:00:00 UTC" << std::endl;
+  // std::cout << tp.time_since_epoch().count() << std::endl;
+  // std::cout << ttp.time_since_epoch().count() << std::endl;
+  // std::cout << tp1.time_since_epoch().count() << std::endl;
 
   return 0;
 }
