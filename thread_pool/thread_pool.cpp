@@ -57,6 +57,12 @@ void ThreadPool::stop()
 {
     stop_ = true;
     std::unique_lock<std::mutex> lock(mtx_);
+    // notify all workers to stop
+    for(auto& worker: workers_)
+    {
+        if(worker != nullptr)
+            worker->task_cond_.notify_one();
+    }
     stop_cond_.wait(lock, [this](){
         return this->stop_num_ == this->worker_num_;
     });
@@ -105,7 +111,9 @@ void Worker::work_()
                     return !this->tasks_queue_.empty() || this->thread_pool_->stop_;
                 });
             }
+            if(thread_pool_->stop_ && tasks_queue_.empty()) break;
         }
+
         auto f = tasks_queue_.front();
         tasks_queue_.pop();
         lock.unlock();

@@ -20,11 +20,13 @@
 int main()
 {
   LocalSender metrics_local;
-  for(int i = 0; i < 101; i++)
-  {
-    metrics_local.send("test", {{"method", "GET"}, {"abc", "123"}}, i);
-  }
+  // for(int i = 0; i < 101; i++)
+  // {
+  //   metrics_local.send("test", {{"method", "GET"}, {"abc", "123"}}, i);
+  // }
   
+  const std::type_info& type = typeid(metrics_local);
+  std::cout << " " << type.name() << std::endl;
 
   // auto tp = std::chrono::system_clock::now();
   // auto ttp = std::chrono::high_resolution_clock::now();
