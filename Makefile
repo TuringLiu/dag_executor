@@ -10,4 +10,3 @@ THREAD_POOL_FILES = thread_pool/thread_pool.cpp
 
 main:
 	$(CXX) $(CXXFLAGS) -I ./ -o $(OBJ) main.cpp $(DAG_FILES) $(LOG_FILES) $(THREAD_POOL_FILES) $(LIB)
-   

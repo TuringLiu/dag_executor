@@ -12,21 +12,23 @@
 #include <thread>
 #include <unistd.h>
 #include <algorithm>
+#include <functional>
 
 #include "log_service/log_sender.h"
-
-#include <functional>
+#include "dynamic_factory/dynamic_factory2.h"
+// #include "access_control/access_control.h"
 
 int main()
 {
-  LocalSender metrics_local;
+  test_dynamic_factory();
+  // test_access();
+  // LocalSender metrics_local;
   // for(int i = 0; i < 101; i++)
   // {
   //   metrics_local.send("test", {{"method", "GET"}, {"abc", "123"}}, i);
   // }
   
-  const std::type_info& type = typeid(metrics_local);
-  std::cout << " " << type.name() << std::endl;
+  // std::cout << get_type_name(metrics_local) << std::endl;
 
   // auto tp = std::chrono::system_clock::now();
   // auto ttp = std::chrono::high_resolution_clock::now();

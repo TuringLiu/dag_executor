@@ -1,5 +1,7 @@
+#pragma once
 #include <chrono>
 #include <fstream>
+#include <cxxabi.h>
 
 using LabelType = std::unordered_map<std::string, std::string>;
 
@@ -72,4 +74,38 @@ long long get_chrono_time(const std::string time)
     // std::cout << "Duration since 1970: " << duration.count() << " ns" << std::endl;
 
     return duration.count();
+}
+
+template<typename T>
+std::string get_type_name(const T&)
+{
+    int status;
+    const std::type_info& type = typeid(T);
+    char* demangledName = abi::__cxa_demangle(type.name(), nullptr, nullptr, &status);
+    std::string type_name;
+    if (status == 0) {
+        type_name = demangledName;
+        std::free(demangledName);
+    } else {
+        std::cerr << "Failed to demangle name" << std::endl;
+        type_name = "failed to demangle name";
+    }
+    return type_name;
+}
+
+template<typename T>
+std::string get_type_name()
+{
+    int status;
+    const std::type_info& type = typeid(T);
+    char* demangledName = abi::__cxa_demangle(type.name(), nullptr, nullptr, &status);
+    std::string type_name;
+    if (status == 0) {
+        type_name = demangledName;
+        std::free(demangledName);
+    } else {
+        std::cerr << "Failed to demangle name" << std::endl;
+        type_name = "failed to demangle name";
+    }
+    return type_name;
 }

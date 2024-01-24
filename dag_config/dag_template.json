@@ -1,0 +1,13 @@
+{
+    "dag": "dag_template",
+    "dependency":
+    {
+        "user_data_node": [],
+        "item_data": ["user_data_node"],
+        "recall_node": ["item_data"],
+        "prerank_node": ["recall_node"],
+        "rank_node": ["prerank_node"],
+        "rank_rule_node": ["rank_node"],
+        "return_node": ["rank_rule_node"]
+    }
+}

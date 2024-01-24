@@ -20,12 +20,12 @@
 // };
 
 using LabelType = std::unordered_map<std::string, std::string>;
+const std::string kDefaultPsm = "NULL_PSM";
 
 class LogSender
 {
 public:
-    LogSender() = delete;
-    LogSender(const std::string& psm, const unsigned int& sample_count = 1000);
+    LogSender(const std::string& psm=kDefaultPsm, const unsigned int& sample_count = 1000);
     virtual void send(const std::string& metric_name, const LabelType& labels, const long long& counter) = 0;
 protected:
     std::shared_ptr<Controler> controler_;
@@ -35,6 +35,7 @@ protected:
     const unsigned int sample_count_;
     const unsigned int sample_base_{10};
 };
+
 LogSender::LogSender(const std::string& psm, const unsigned int& sample_count): psm_{psm}, sample_count_{sample_count}
 {
 }
@@ -60,7 +61,7 @@ public:
 class LocalSender : LogSender
 {
 public:
-    LocalSender(const std::string& local_path);
+    LocalSender(const std::string& local_path="./tmp.log");
     LocalSender(const std::string& local_path, std::shared_ptr<ThreadPool>& thread_pool);
     ~LocalSender();
 
@@ -76,7 +77,7 @@ private:
     std::shared_ptr<ThreadPool> thread_pool_;
 };
 
-LocalSender::LocalSender(const std::string& local_path="./tmp.log"): LogSender("NULL_PSM", 1000), local_path_{local_path}
+LocalSender::LocalSender(const std::string& local_path): LogSender(), local_path_{local_path}
 {
     thread_pool_ = std::make_shared<ThreadPool>(1, 100);
 }
