@@ -2,11 +2,14 @@
     "dag": "dag_template",
     "dependency":
     {
-        "user_data_node": [],
+        "init_node": [],
+        "user_data_node": ["init_node"],
         "item_data": ["user_data_node"],
         "recall_node": ["item_data"],
+        "pre_filter_node": ["recall_node"],
         "prerank_node": ["recall_node"],
-        "rank_node": ["prerank_node"],
+        "fiter_node" : ["prerank_node"],
+        "rank_node": ["filter_node"],
         "rank_rule_node": ["rank_node"],
         "return_node": ["rank_rule_node"]
     }

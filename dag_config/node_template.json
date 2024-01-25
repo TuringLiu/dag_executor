@@ -1,0 +1,18 @@
+{
+    "dag": "dag_template",
+    "node_list":[
+        "init_node", ""
+    ],
+    "node_info":{
+        "init_node": {
+            "description": "init user_data and eng_data",
+            "data":{
+                "eng": 0,
+                "comm.user_data": 0,
+                
+            }
+
+        },
+    }
+
+}
