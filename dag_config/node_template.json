@@ -1,18 +1,120 @@
 {
     "dag": "dag_template",
     "node_list":[
-        "init_node", ""
+        "init_node", 
+        "user_data_node", 
+        "item_recall_node", "live_item_recall_node",
+        "item_data_node", 
+        "pre_filter_node",
+        "rank_node", "live_rank_node",
+        "post_filter_node",
+        "ranking_rule_node",
+        "return_node" 
     ],
     "node_info":{
         "init_node": {
-            "description": "init user_data and eng_data",
+            "description": "read local config and user info",
             "data":{
                 "eng": 0,
-                "comm.user_data": 0,
-                
+                "comm.user_data": 0
             }
-
         },
+        "user_data_node": {
+            "description": "init user model scores",
+            "data":{
+                "video.user_scores": 0,
+                "video.model_list": 0,
+                "live.user_scores": 0,
+                "live.model_list": 0
+            }
+        },
+        "item_recall_node": {
+            "description": "recall video based on user and model",
+            "data":{
+                "comm.user_data": 1,
+                "video.list": 0,
+                "video.model_list": 1,
+                "video.user_scores": 1
+            }
+        },
+        "live_item_recall_node":{
+            "description": "recall live based on user and model",
+            "data":{
+                "comm.user_data": 1,
+                "live.list": 0,
+                "live.model_list": 1,
+                "live.user_scores": 1
+            }
+        },
+        "item_data_node": {
+            "description": "get item data",
+            "data":{
+                "video.list": 1,
+                "video.item_data": 0,
+                "live.list": 1,
+                "live.item_data": 0
+            }
+        },
+        "pre_filter_node":{
+            "description": "filter video and live based on some rules, ex: child can't watch adult video, korea people can't watch japan video",
+            "data":{
+                "comm.user_data": 1,
+                "video.item_data": 1,
+                "live.item_data":1,
+                "video.list": -1,
+                "live.list": -1
+            }
+        },
+        "rank_node": {
+            "description": "rank video based on user and model",
+            "data":{
+                "comm.user_data":1,
+                "video.model_list": 1,
+                "video.user_scores": 1,
+                "video.item_data": -1,
+                "video.list": -2
+            }
+        },
+        "live_rank_node":{
+            "description": "rank live based on user and model",
+            "data":{
+                "comm.user_data":1,
+                "live.model_list": 1,
+                "live.user_scores": 1,
+                "live.item_data": -1,
+                "live.list": -2
+            }
+        },
+        "post_filter_node":{
+            "description": "filter video and live based on tags and scores",
+            "data":{
+                "comm.user_data": 1,
+                "video.item_data.scores": 2,
+                "video.item_data.tags": -2,
+                "live.item_data.scores": 2,
+                "live.item_data.tags": -2,
+                "video.list": -3,
+                "live.list": -3
+            }
+        },
+        "ranking_rule_node":{
+            "description": "merge video and live list, and sort by some rules",
+            "data":{
+                "comm.user_data": 1,
+                "video.list":-4,
+                "live.list": 4,
+                "video.item_data.tags": 3,
+                "live.item_data.tags": 3
+            }
+        },
+        "return_node":{
+            "description": "return result",
+            "data":{
+                "video.list": 5
+            }
+        }
+
+
     }
 
 }

@@ -12,19 +12,14 @@ struct UserData
 struct ItemData
 {
     1: required string item_id,
-    1: required map<string, list<double>> item_scores,
-    3: required list<string> tags
-}
-
-struct Log
-{
-    1: required string latency,
-    2: required string video_num
+    2: required string location,
+    3: required map<string, list<double>> scores,
+    4: required list<string> tags
 }
 
 struct ThreadConfig
 {
-    1：required i32 num,
+    1: required i32 num,
     2: required i32 task_num
 }
 
@@ -38,32 +33,37 @@ struct ShortVideo
 {
     1: required list<i64> list
     2: required list<string> model_list
+    3: required map<string, list<double>> user_scores,
+    4：required map<i64, ItemData> item_data,
 }
 
 struct Ecommerce
 {
-    1: required list<i64> list
-    2: required list<string> model_list
+    1: required list<i64> list,
+    2: required list<string> model_list,
+    3: required map<string, list<double>> user_scores,
+    4：required map<i64, ItemData> item_data,
 }
 
 struct Live
 {
-    1: required list<i64> list
-    2: required list<string> model_list
+    1: required list<i64> list,
+    2: required list<string> model_list,
+    3: required map<string, list<double>> user_scores,
+    4：required map<i64, ItemData> item_data,
 }
 
+# 仅可读，是否应该删去？这应该是在业务框架之外的
 struct Engineering
 {
-    1: required Log log,
-    2: required ThreadConfig thread_conf,
-    3: required CircuitBreaker breaker_conf
+    1: required ThreadConfig thread_conf,
+    2: required CircuitBreaker breaker_conf
 }
 
-
+# common中的数据仅可读，不可写【即只能出现0和1】
 struct Common
 {
-    1: UserData user_data,
-    2: ItemData item_data,
+    1: UserData user_data
 }
 
 struct Request
