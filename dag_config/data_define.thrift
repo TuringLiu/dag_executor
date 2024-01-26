@@ -6,7 +6,7 @@ struct UserData
     2: required i32 age,
     3: required string sex,
     4: required string location,
-    5: required i32 device_id,
+    5: i32 device_id,
 }
 
 struct ItemData
@@ -34,7 +34,7 @@ struct ShortVideo
     1: required list<i64> list
     2: required list<string> model_list
     3: required map<string, list<double>> user_scores,
-    4：required map<i64, ItemData> item_data,
+    4: required map<i64, ItemData> item_data,
 }
 
 struct Ecommerce
@@ -42,7 +42,7 @@ struct Ecommerce
     1: required list<i64> list,
     2: required list<string> model_list,
     3: required map<string, list<double>> user_scores,
-    4：required map<i64, ItemData> item_data,
+    4: required map<i64, ItemData> item_data,
 }
 
 struct Live
@@ -50,7 +50,7 @@ struct Live
     1: required list<i64> list,
     2: required list<string> model_list,
     3: required map<string, list<double>> user_scores,
-    4：required map<i64, ItemData> item_data,
+    4: required map<i64, ItemData> item_data,
 }
 
 # 仅可读，是否应该删去？这应该是在业务框架之外的

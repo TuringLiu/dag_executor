@@ -1,16 +1,38 @@
 {
     "dag": "dag_template",
-    "dependency":
-    {
+    "node_dep": {
         "init_node": [],
-        "user_data_node": ["init_node"],
-        "item_data": ["user_data_node"],
-        "recall_node": ["item_data"],
-        "pre_filter_node": ["recall_node"],
-        "prerank_node": ["recall_node"],
-        "fiter_node" : ["prerank_node"],
-        "rank_node": ["filter_node"],
-        "rank_rule_node": ["rank_node"],
-        "return_node": ["rank_rule_node"]
+        "user_data_node": [],
+        "item_recall_node": [
+            "init_node",
+            "user_data_node"
+        ],
+        "live_item_recall_node": [
+            "init_node",
+            "user_data_node"
+        ],
+        "item_data_node": [
+            "item_recall_node",
+            "live_item_recall_node"
+        ],
+        "pre_filter_node": [
+            "item_data_node"
+        ],
+        "rank_node": [
+            "pre_filter_node"
+        ],
+        "live_rank_node": [
+            "pre_filter_node"
+        ],
+        "post_filter_node": [
+            "live_rank_node",
+            "rank_node"
+        ],
+        "ranking_rule_node": [
+            "post_filter_node"
+        ],
+        "return_node": [
+            "ranking_rule_node"
+        ]
     }
 }
