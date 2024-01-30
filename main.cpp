@@ -20,7 +20,7 @@
 
 int main()
 {
-  test_dynamic_factory();
+  // test_dynamic_factory();
   // test_access();
   // LocalSender metrics_local;
   // for(int i = 0; i < 101; i++)
