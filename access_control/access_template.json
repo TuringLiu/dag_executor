@@ -1,0 +1,27 @@
+{
+    "dag": "access_template",
+    "node_list":[
+        "init_node", 
+        "return_node" 
+    ],
+    "node_info":{
+        "init_node": {
+            "description": "read local config and user info",
+            "data":{
+                "eng": 0,
+                "comm.user_data": 0
+            },
+            "class_name": "InitNode"
+        },
+        "return_node":{
+            "description": "return result",
+            "data":{
+                "video.list": 5
+            },
+            "class_name": "ReturnNode"
+        }
+
+
+    }
+
+}

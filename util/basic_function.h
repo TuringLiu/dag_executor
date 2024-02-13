@@ -2,6 +2,10 @@
 #include <chrono>
 #include <fstream>
 #include <cxxabi.h>
+#include <unordered_map>
+#include <mutex>
+#include <iostream>
+#include <vector>
 
 using LabelType = std::unordered_map<std::string, std::string>;
 
@@ -29,7 +33,7 @@ inline void save_string(const std::string& log, const std::string& path)
     std::unique_lock<std::mutex> lock(mutex_);
     std::ofstream outputFile(path, std::ios::out|std::ios::app);
     if (!outputFile.is_open()) {
-        std::cerr << "无法打开文件 " << path << std::endl;
+        std::cout << "无法打开文件 " << path << std::endl;
         return ;
     }
     outputFile << log;
