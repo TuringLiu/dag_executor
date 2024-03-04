@@ -10,6 +10,7 @@ Scheduler::Scheduler(): name_{"default_scheduler"}
 Scheduler::Scheduler(const std::string& name): name_{name}
 {
 }
+
 Scheduler::~Scheduler()
 {
     Executor::works_over();
@@ -20,6 +21,8 @@ void Scheduler::add_task(TaskPtr task)
     tasks_.emplace_back(task);
     task->schedule_ = this;
 }
+
+
 
 void Scheduler::execute()
 {
@@ -36,7 +39,7 @@ void Scheduler::pre_run_()
 
 void Scheduler::work_()
 {
-    // only start task and end task 
+    // only start task
     wait_executed = tasks_.size();
     for(auto& task: tasks_)
     {
@@ -47,7 +50,7 @@ void Scheduler::work_()
             });
         }
     }
-    // wait to executed
+    // end scheduler after all tasks done
     {
         std::unique_lock<std::mutex> lock(count_mtx_);
         count_cond_.wait(lock, [this](){

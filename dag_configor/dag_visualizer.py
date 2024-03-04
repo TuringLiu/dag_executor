@@ -22,8 +22,6 @@ from dag_util import *
 def get_node_attr(node_name: str, node_attr: dict):
     pass
 
-
-
 def data_dot(args):
     data_structure = IDL_parser(args.IDL_PATH)
     DIY_expand = expand_DIY_type(data_structure)
@@ -91,5 +89,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     main(args)
-
-

@@ -125,6 +125,7 @@ def IDL_parser(IDL_PATH):
             DIY_type[sturct_name] += parse_line(line)
             if "}" in line:
                 status = "wait_struct"
+
     # for key, d in DIY_type.items():
     #     print(key, d)
     return DIY_type
@@ -145,8 +146,9 @@ def expand_DIY_type(DIY_type):
         return diy_type_name
 
     DIY_expand = dict(list())
-    for key, d in DIY_type.items():
+    for key in DIY_type.keys():
         DIY_expand[key] = dfs(key)
+    # print(DIY_expand)
     return DIY_expand
 
 def expand_node_data(json_data, DIY_expand):

@@ -8,6 +8,7 @@ class Executor
 {
 public:
     void add_task(std::function<void()>&& f);
+    std::future<int> add_task_async(std::function<void()>&& f);
     static Executor* get_instance();
     static void works_over();
 

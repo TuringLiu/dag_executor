@@ -6,6 +6,7 @@
 #include <queue>
 #include <vector>
 #include <atomic>
+#include <future>
 // todo: support return-value ways [future instance]
 // todo：目前的有界任务队列，任务溢出时，需放至redis缓存中
 // todo: 引入信号量机制，当任务队列超过1s无任务执行时，就切换至阻塞态
@@ -22,6 +23,7 @@ public:
     ~ThreadPool();
 
     void add_task(std::function<void()>);
+    std::future<int> add_task_async(std::function<void()>);
     void stop();
 
 private:

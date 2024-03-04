@@ -4,12 +4,12 @@
         "init_node": [],
         "user_data_node": [],
         "item_recall_node": [
-            "init_node",
-            "user_data_node"
+            "user_data_node",
+            "init_node"
         ],
         "live_item_recall_node": [
-            "init_node",
-            "user_data_node"
+            "user_data_node",
+            "init_node"
         ],
         "item_data_node": [
             "item_recall_node",
@@ -25,8 +25,8 @@
             "pre_filter_node"
         ],
         "post_filter_node": [
-            "rank_node",
-            "live_rank_node"
+            "live_rank_node",
+            "rank_node"
         ],
         "ranking_rule_node": [
             "post_filter_node"

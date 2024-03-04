@@ -42,6 +42,20 @@ void ThreadPool::add_task(std::function<void()> f)
     idx_ = (idx_ + 1) % worker_num_;
 }
 
+std::future<int> ThreadPool::add_task_async(std::function<void()> f)
+{
+    std::packaged_task<int()> task([&f](){
+        f();
+        return 0;
+    });
+
+    std::future<int> res = task.get_future();
+    add_task([&task](){
+        task();
+    });
+    return res;
+}
+
 void ThreadPool::run_()
 {
     // 调度work执行任务

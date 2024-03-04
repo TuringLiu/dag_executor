@@ -15,6 +15,11 @@ inline long long absolute_time_count()
     return std::chrono::system_clock::now().time_since_epoch().count();
 }
 
+inline long long relative_time_count()
+{
+    return std::chrono::steady_clock::now().time_since_epoch().count();
+}
+
 inline std::string serial_log(const std::string& metric_name, const LabelType& labels, const long long& counter, const long long& send_time)
 {
     std::string log = metric_name + " " + std::to_string(send_time) + " " + std::to_string(counter) + " ";

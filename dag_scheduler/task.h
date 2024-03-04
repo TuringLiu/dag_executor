@@ -44,6 +44,8 @@ private:
     std::string name_;
     std::atomic<int> condition_;
     std::mutex mtx_;
+    
+    
 };
 
 template<typename CC>

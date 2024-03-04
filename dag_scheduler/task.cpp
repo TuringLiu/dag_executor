@@ -13,11 +13,13 @@ void Task::execute_()
 void Task::pre_run_()
 {
     // todo: add some log metrics init in here
+    
 }
 
 void Task::post_run_()
 {
-    // todo: inform successor and add some log
+    // todo: add some log
+
 
     // inform successor
     for(auto& successor: successors_)

@@ -9,14 +9,19 @@
             "description": "read local config and user info",
             "data":{
                 "eng": 0,
-                "comm.user_data": 0
+                "comm.user_data": 1
             },
-            "class_name": "InitNode"
+            "class_name": "InitNode",
+            "circuit":{
+                "replace_node": "node_info_replace",
+                "life": 1000
+            }
         },
         "return_node":{
             "description": "return result",
             "data":{
-                "video.list": 5
+                "video.list": 0,
+                "comm.user_data": 1
             },
             "class_name": "ReturnNode"
         }
